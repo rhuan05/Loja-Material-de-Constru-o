@@ -40,7 +40,7 @@ main{
 #modeloAdicionaProduto{
     width: 500px;
     position: absolute;
-    left: 26%;
+    left: 33%;
     background: white;
     padding: 10px;
     border-radius: 5px;
@@ -189,4 +189,8 @@ section form{
     section form{
         width: 250px;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 7e1ad8e95b32e900600d0cca1a3c931163f79826

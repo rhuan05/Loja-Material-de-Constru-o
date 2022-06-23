@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <% if(erro != ''){ %>
+        <div id="erroPreencherCampos"><%= erro %></div>
+    <% } %>
+    <header>
+        <div id="modeloAdicionaProduto">
+            <div id="fecharModelo">X</div>
+            <form method="post" enctype="multipart/form-data">
+                <input type="text" name="nomeProduto" id="nomeProdutoInput" placeholder="Nome do produto...">
+                <input type="number" name="precoProduto" id="precoProdutoInput" placeholder="Preço do produto...">
+                <input type="file" name="file" id="imgProduto">
+                <input type="submit" id="enviarProdutoInput">
+            </form>
+        </div>
+        <h1>Seus produtos</h1>
+    </header>
+    <main>
+        <button class="btnDefault" id="adicionarProdutoBtn">ADICIONAR PRODUTO</button>
+        <table id="produtos">
+            <% if(produtos.length != 0){ %>
+                <thead>
+                    <th>Nome</th>
+                    <th>Preço</th>
+                </thead>
+            <% } %>
+            <tbody>
+            <% for(let i=0; i < produtos.length; i++){ %>
+                <tr class="produto">
+                    <td class="nomeProduto"><%= produtos[i].produto %></td>
+                    <td class="precoProduto">R$ <%= produtos[i].preco %></td>
+                    <form action="/admin/delete" method="post">
+                        <input type="hidden" name="id" value=<%= produtos[i]._id %>>
+                        <td class="deleteBtnTd"><button id="deleteBtn">X</button></td>
+                    </form>
+                </tr>
+            <% } %>
+            </tbody>
+        </table>
+        <section>
+            <h2 id="styleWebsiteSection">Adicione um banner</h2>
+            <form action="/admin/banner" method="post" enctype="multipart/form-data">
+                <input type="file" name="fileBanner" id="fileBanner">
+                <button class="btnDefault" id="sendBannerBtn">Enviar banner</button>
+            </form>
+        </section>
+    </main>
+    <script src="js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja</title>
+    <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+    <div id="modeloNovoProduto">
+        <div class="fileira--elemento">
+            <img class="imagemProduto" src="" />
+            <h3 class="nomeProduto"></h3>
+            <h3 class="precoProduto"></h3>
+        </div>
+    </div>
+    <div id="modeloProdutoEscolhido">
+        <div id="imgEscolhida">
+            <img src="" />
+        </div>
+        <div id="textosEscolhido">
+            <div id="fecharEscolhido">X</div>
+            <div id="nomeEscolhido"></div>
+            <div id="precoEscolhido"></div>
+            <button id="btnEscolhido">Entrar em contato</button>
+        </div>
+    </div>
+    <header>
+        <div id="logo">JF</div>
+        <nav>
+            <a href="/" class="headerLink">HOME</a>
+            <a href="/" class="headerLink">CONTATO</a>
+            <a href="/" class="headerLink">PRODUTOS</a>
+        </nav>
+        <div id="menuCelular"></div>
+    </header>
+    <main>
+        <a href="/" id="contatoWpp">
+            <img  class="logoWpp" src="images/homeImages/whatsapp_logo.png"/>
+            <p class="paragrafoWpp">Clique aqui e fale conosco</p>
+        </a>
+        <section id="banner"><img id="imgBanner" src=<%= banner.imgBanner %> /></section>
+        <section id="eletrica" class="sectionProdutos">
+            <h2 class="tituloSection">Produtos</h2>
+            <div class="fileira">
+                <% for(let i=0; i < produtos.length; i++){ %>
+                    <div class="fileira--elemento">
+                        <img class="imagemProduto" src=<%= produtos[i].img %> />
+                        <h3 class="nomeProduto"><%= produtos[i].produto %></h3>
+                        <h3 class="precoProduto">R$<%= produtos[i].preco %></h3>
+                    </div>
+                <% } %>
+            </div>
+        </section>
+        <section id="localizacao" class="sectionProdutos">
+            <h2 id="tituloLocalizacao">Onde estamos localizados?</h2>
+            <address id="paragrafoLocalizacao">Você pode nos encontrar na Rua dos Pinheiros N°70 - Jardim Felicidade.<br>Clique no mapa abaixo para ver a localização:</address>
+            <a href="https://www.google.com/maps/place/R.+dos+Pinheiros,+70+-+Jardim+Felicidade(Zona+Norte),+S%C3%A3o+Paulo+-+SP,+02326-005/@-23.4417939,-46.5763238,3a,75y,57.35h,90t/data=!3m6!1e1!3m4!1sxcJGFbJ2qTQtQB9WscnD4Q!2e0!7i16384!8i8192!4m5!3m4!1s0x94cef4382d972fa9:0xedb79ec6856374c1!8m2!3d-23.4417385!4d-46.5762534"><img id="imgLocalizacao" src="images/homeImages/mapa.PNG" /></a>
+        </section>
+    </main>
+    <footer>
+        <a href="/">
+            <img  class="logoWpp" src="images/homeImages/whatsapp_logo.png" />
+            <p class="paragrafoWpp">Clique aqui e fale conosco</p>
+        </a>
+    </footer>
+    <script src="js/home.js"></script>
+</body>
+</html>

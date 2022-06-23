@@ -35,7 +35,7 @@ exports.newProduct = async (req, res)=>{
     const productForDB = new ProductModel({
         produto: product.nomeProduto,
         preco: product.precoProduto,
-        img: `http://localhost:3000/files/${filename.filename}`
+        img: `https://lojamaterialdeconstrucoes.herokuapp.com/files/${filename.filename}`
     });
 
     try{

@@ -58,7 +58,7 @@ exports.delete = async (req, res)=>{
 
 exports.bannerImg = async (req, res)=>{
     const bannerForDB = new BannerModel({
-        imgBanner: `http://localhost:3000/files/${filename.filename}`
+        imgBanner: `https://lojamaterialdeconstrucoes.herokuapp.com/files/${filename.filename}`
     });
 
     const imgInDB = await BannerModel.find();

@@ -40,7 +40,7 @@ main{
 #modeloAdicionaProduto{
     width: 500px;
     position: absolute;
-    left: 35%;
+    left: 26%;
     background: white;
     padding: 10px;
     border-radius: 5px;
@@ -113,5 +113,80 @@ section{
     height: 90vh;
 }
 section form{
+    margin: auto;
     margin-top: 20px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    padding: 10px;
+    border-radius: 5px;
+    gap: 10px;
+}
+#sendBannerBtn{
+    font-weight: 600;
+    color: white;
+    background:#00AB59;
+    padding: 5px 8px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+@media(max-width: 768px){
+    .btnDefault{
+        padding: 5px 2px;
+        font-size: 12px;
+        width: 140px;
+        right: -70px;
+        font-weight: 600;
+    }
+    #modeloAdicionaProduto{
+        left: 130px;
+        padding: 20px;
+    }
+}
+@media(max-width: 425px){
+    .btnDefault{
+        padding: 5px 2px;
+        font-size: 12px;
+        width: 140px;
+        right: -165px;
+        font-weight: 600;
+    }
+    table{
+        width: 350px;
+        margin-top: 50px;
+        text-align: left;
+        font-size: 14px;
+    }
+    #modeloAdicionaProduto{
+        width: 350px;
+        left: 20px;
+        padding: 20px;
+    }
+}
+@media(max-width: 375px){
+    table{
+        width: 315px;
+    }
+    #modeloAdicionaProduto{
+        width: 290px;
+        left: 20px;
+        padding: 20px;
+    }
+    h1, h2{
+        font-size: 24px;
+    }
+}
+@media(max-width: 320px){
+    table{
+        width: 270px;
+    }
+    #modeloAdicionaProduto{
+        width: 240px;
+    }
+    section form{
+        width: 250px;
+    }
 }

@@ -1,6 +1,5 @@
 const ProductModel = require('../models/Products');
 const BannerModel = require('../models/Banner');
-const filename = require('../routes/routes');
 let erro = '';
 
 exports.renderAdmin = async (req, res)=>{
@@ -22,7 +21,7 @@ exports.newProduct = async (req, res)=>{
         res.render('admin', { produtos: productsInDB, erro: erro });
         return;
     }
-    if(!filename.filename){
+    if(!req.file.originalname){
         let erro = 'Para inserir o seu produto é preciso adicionar uma imagem.';
         res.render('admin', { produtos: productsInDB, erro: erro });
         console.log(product);
@@ -35,12 +34,11 @@ exports.newProduct = async (req, res)=>{
     const productForDB = new ProductModel({
         produto: product.nomeProduto,
         preco: product.precoProduto,
-        img: `https://lojamaterialdeconstrucoes.herokuapp.com/files/${filename.filename}`
+        img: `https://lojamaterialdeconstrucoes.herokuapp.com/files/${req.file.originalname}`
     });
 
     try{
         await productForDB.save();
-        filename.filename = '';
         const productsInDB = await ProductModel.find();
         res.render('admin', { produtos: productsInDB, erro: erro });
     }catch(error){
@@ -58,13 +56,12 @@ exports.delete = async (req, res)=>{
 
 exports.bannerImg = async (req, res)=>{
     const bannerForDB = new BannerModel({
-        imgBanner: `https://lojamaterialdeconstrucoes.herokuapp.com/files/${filename.filename}`
+        imgBanner: `https://lojamaterialdeconstrucoes.herokuapp.com/files/${req.file.originalname}`
     });
 
     const imgInDB = await BannerModel.find();
     if(imgInDB.length >= 1){
         await BannerModel.findOneAndRemove('imgBanner');
-        console.log('REMOVIDO');
     }
 
     try{

@@ -34,11 +34,12 @@ exports.newProduct = async (req, res)=>{
         let erro = '';
     }
 
-    cloudinary.uploader.upload(`./uploads/${req.file.originalname}`, {
-        resource_type: 'image'
-    })
-    .then(async (link) => {
-        const productForDB = new ProductModel({
+    try{
+        cloudinary.uploader.upload(`./uploads/${req.file.originalname}`, {
+            resource_type: 'image'
+        })
+        .then(async (link) => {
+            const productForDB = new ProductModel({
             produto: product.nomeProduto,
             preco: product.precoProduto,
             img: link.url
@@ -53,7 +54,9 @@ exports.newProduct = async (req, res)=>{
             console.log(error);
         }
     })
-    .catch(err => console.log('[Erro]', err))
+    } catch(err){
+        console.log('[Erro]', err)
+    }
 }
 
 exports.delete = async (req, res)=>{
@@ -64,19 +67,28 @@ exports.delete = async (req, res)=>{
 }
 
 exports.bannerImg = async (req, res)=>{
-    const bannerForDB = new BannerModel({
-        imgBanner: `https://lojamaterialdeconstrucoes.herokuapp.com/files/${req.file.originalname}`
-    });
-
-    const imgInDB = await BannerModel.find();
-    if(imgInDB.length >= 1){
-        await BannerModel.findOneAndRemove('imgBanner');
-    }
-
     try{
-        await bannerForDB.save();
-        res.redirect('/admin');
-    }catch(error){
-        console.log(error);
+        cloudinary.uploader.upload(`./uploads/${req.file.originalname}`, {
+            resource_type: 'image'
+        })
+        .then(async (link) => {
+            const bannerForDB = new BannerModel({
+                imgBanner: link.url
+            });
+        
+            const imgInDB = await BannerModel.find();
+            if(imgInDB.length >= 1){
+                await BannerModel.findOneAndRemove('imgBanner');
+            }
+        
+            try{
+                await bannerForDB.save();
+                res.redirect('/admin');
+            }catch(error){
+                console.log(error);
+            }
+        })
+    }catch(err){
+        console.log(err);
     }
 }

@@ -1,6 +1,9 @@
+require('dotenv').config();
 const ProductModel = require('../models/Products');
 const BannerModel = require('../models/Banner');
 let erro = '';
+
+const cloudinary = require('cloudinary').v2;
 
 exports.renderAdmin = async (req, res)=>{
     const productsInDB = await ProductModel.find();
@@ -8,6 +11,8 @@ exports.renderAdmin = async (req, res)=>{
 }
 
 exports.newProduct = async (req, res)=>{
+    let imageProduct;
+
     const productsInDB = await ProductModel.find();
     const product = req.body;
 
@@ -31,20 +36,26 @@ exports.newProduct = async (req, res)=>{
         let erro = '';
     }
 
-    const productForDB = new ProductModel({
-        produto: product.nomeProduto,
-        preco: product.precoProduto,
-        img: `https://lojamaterialdeconstrucoes.herokuapp.com/files/${req.file.originalname}`
-    });
-
-    try{
-        await productForDB.save();
-        const productsInDB = await ProductModel.find();
-        res.render('admin', { produtos: productsInDB, erro: erro });
-    }catch(error){
-        console.log('DEU RUIM NO CADASTRO DO PRODUTO.');
-        console.log(error);
-    }
+    cloudinary.uploader.upload(`./uploads/${req.file.originalname}`, {
+        resource_type: 'image'
+    })
+    .then(async (link) => {
+        const productForDB = new ProductModel({
+            produto: product.nomeProduto,
+            preco: product.precoProduto,
+            img: link.url
+        });
+    
+        try{
+            await productForDB.save();
+            const productsInDB = await ProductModel.find();
+            res.render('admin', { produtos: productsInDB, erro: erro });
+        }catch(error){
+            console.log('DEU RUIM NO CADASTRO DO PRODUTO.');
+            console.log(error);
+        }
+    })
+    .catch(err => console.log('[Erro]', err))
 }
 
 exports.delete = async (req, res)=>{

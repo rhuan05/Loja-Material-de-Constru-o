@@ -11,8 +11,6 @@ exports.renderAdmin = async (req, res)=>{
 }
 
 exports.newProduct = async (req, res)=>{
-    let imageProduct;
-
     const productsInDB = await ProductModel.find();
     const product = req.body;
 
